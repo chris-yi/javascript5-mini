@@ -63,6 +63,19 @@ var customers = [{
 // Create and array of all email addresses
 // first without using underscore's pluck, then with it.
 
+////// NON UNDERSCORE WAY //////
+
+let customerEmails = customers.map(customer => customer.email);
+
+////// UNDERSCORE WAY //////
+
+let underscoreEmails = _.pluck(customers, "email");
+
+
+
+
+
+
 
 
 
@@ -76,6 +89,22 @@ var inviteList2 = ['Jake', 'Mildred', 'Jimmy', 'Ed', 'Franklin']
   // Then remove all duplicates using _.union().
 
 
+////// NON UNDERSCORE WAY //////
+let combinedList = [...inviteList1, ...inviteList2];
+combinedList = combinedList.filter((e, i, a) => {
+  a.indexOf(e) === i;
+})
+
+////// UNDERSCORE WAY //////
+
+let underscoreCombine = _.union(inviteList1, inviteList2);
+
+
+
+
+
+
+
 
 
 
@@ -86,6 +115,28 @@ var inviteList2 = ['Jake', 'Mildred', 'Jimmy', 'Ed', 'Franklin']
 
 
   // Jim and Betty are having a party, but they only want to invite mutual friends. Create and array of mutual friends. First without using underscore, then using underscores _.intersection().
+
+
+////// NON UNDERSCORE WAY //////
+let mutual = friendsOfJim.reduce((friend) => {
+  if (friendsOfBetty.indexOf(friend) != -1) {
+    list.push(friend);
+  }
+  return list;
+}, [])
+
+////// UNDERSCORE WAY //////
+
+let underscoreMutual = _.intersection(friendsOfBetty, friendsOfJim);
+
+
+
+
+
+
+
+
+
 
 
 var purchases = [{
@@ -111,5 +162,16 @@ var purchases = [{
 // then do it again using _.groupBy()
 
 
+////// NON UNDERSCORE WAY //////
+let groups = purchases.reduce((groups, e) => {
+  if(groups[e.company]){
+    groups[e.company.push(e)]
+  } else {
+    groups[e.company] = [e];
+  }
+  return groups
+}, {})
 
+////// UNDERSCORE WAY //////
 
+let underscoreGroup = _.groupBy(purchases, "company")
